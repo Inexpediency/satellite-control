@@ -1,6 +1,5 @@
 import processing.net.*;
 import java.util.List;
-import javafx.util.Pair;
 
 final boolean IS_DEV = true; // DEV -> 0; PROD -> 1;
 
@@ -35,14 +34,21 @@ void setup() {
   background(150);
   stroke(0);
   
-  movementData = new MovementData();
+  Client server = new Client(this, "someport", 1234);
+
+  if (IS_DEV) {
+    movementData = new MovementData();
+  } else {
+    movementData = new MovementData(server);
+  }
+
   repository = new Repository();
   eventManager = new EventManager(repository);
 
   if (!IS_DEV) {
-    eventManager.subscribe(new Printer());
-    eventManager.subscribe(new ServerListener(new Client(this, "someport", 1234))); 
+    eventManager.subscribe(new ServerListener(server)); 
   }
+  eventManager.subscribe(new Printer());
   
   buttons = new ArrayList<Button>(2);
   buttons.add(new Button("forward", x2, y1, eventManager));
@@ -172,7 +178,7 @@ void drawCircles() {
 }
 
 void fillYellow() { fill(255, 255, 1); }
-void fillGreen() {  fill(0, 255, 0); }
+void fillGreen() { fill(0, 255, 0); }
 
 void updateCircles(Repository repository) {
   switch (repository.direction) {
@@ -311,7 +317,9 @@ void updateLightPanels(int lightLeft, int lightForward, int lightRight) {
   rect(width*2/3, 0, width, height);
 }
 
-void setupGradient(float dist, float x1, float y1, float x2, float y2, float x3, float y3) {
+void setupGradient(
+  float dist, float x1, float y1, float x2, float y2, float x3, float y3
+) {
   color red = color(255, 0, 0);
   color green = color(0, 255, 0);
   color yel = color(255, 255, 0);
@@ -329,9 +337,9 @@ void setupGradient(float dist, float x1, float y1, float x2, float y2, float x3,
     
     stroke(c);
     line(
-      ((x1 - x2) * float(i) / dist),
-      (y1 - i),
-      ((x1 - x3) * float(i) / dist),
+      (x1 - x2) * float(i) / dist,
+      y1 - i,
+      (x1 - x3) * float(i) / dist,
       y1 - i
     );
   }
@@ -415,19 +423,21 @@ class MovementData {
   }
 
   void updateData() {
-    String input = server.readString();
-    input = input.substring(0, input.indexOf("\n"));
-    int[] data = int(split(input, ' '));
+    if (server.available() > 0) {
+      String input = server.readString();
+      input = input.substring(0, input.indexOf("\n"));
+      int[] data = int(split(input, ' '));
 
-    lightLeft = data[0]; 
-    lightForward = data[1]; 
-    lightRight = data[2]; 
-    distLeft = data[3]; 
+      lightLeft = data[0]; 
+      lightForward = data[1]; 
+      lightRight = data[2]; 
+      distLeft = data[3]; 
 
-    distForwardLeft = data[4]; 
-    distForward = data[5]; 
-    distForwardRight = data[6];
-    distRight = data[7];
+      distForwardLeft = data[4]; 
+      distForward = data[5]; 
+      distForwardRight = data[6];
+      distRight = data[7];
+    }
   }
 
   String serialize() {
@@ -481,10 +491,10 @@ class MovementData {
       case ';':
         distForwardRight -= step;
         break;
-      case '.':
+      case '[':
         distRight += step;
         break;
-      case ',':
+      case '\'':
         distRight -= step;
         break;
     }
