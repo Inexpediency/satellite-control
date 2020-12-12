@@ -1,5 +1,6 @@
 import processing.net.*;
 import java.util.List;
+import java.util.HashMap;
 
 final boolean IS_DEV = true; // DEV -> 0; PROD -> 1;
 
@@ -26,6 +27,7 @@ final int maxDrawableDist = 100;
 
 EventManager eventManager;
 List<Button> buttons;
+HashMap<String, Button> movementButtons;
 Repository repository;
 MovementData movementData;
 
@@ -50,17 +52,43 @@ void setup() {
   }
   eventManager.subscribe(new Printer());
   
-  buttons = new ArrayList<Button>(2);
-  buttons.add(new Button("forward", x2, y1, eventManager));
-  buttons.add(new Button("down", x2, y3, eventManager));
-  buttons.add(new Button("left", x1, y2, eventManager));
-  buttons.add(new Button("right", x3, y2, eventManager));
+  movementButtons = new HashMap<String, Button>();
+  buttons = new ArrayList<Button>();
+
+  // init movement buttons
+  Button forwardButton = new Button("forward", x2, y1, eventManager);
+  buttons.add(forwardButton);
+  movementButtons.put("forward", forwardButton);
+
+  Button downButton = new Button("down", x2, y3, eventManager);
+  buttons.add(downButton);
+  movementButtons.put("down", downButton);
+
+  Button leftButton = new Button("left", x1, y2, eventManager);
+  buttons.add(leftButton);
+  movementButtons.put("left", leftButton);
+
+  Button rightButton = new Button("right", x3, y2, eventManager);
+  buttons.add(rightButton);
+  movementButtons.put("right", rightButton);
   
-  buttons.add(new Button("forwardLeft", x1, y1, eventManager));
-  buttons.add(new Button("forwardRight", x3, y1, eventManager));
-  buttons.add(new Button("downLeft", x1, y3, eventManager));
-  buttons.add(new Button("downRight", x3, y3, eventManager));
+  Button forwardLeftButton = new Button("forwardLeft", x1, y1, eventManager);
+  buttons.add(forwardLeftButton);
+  movementButtons.put("forwardLeft", forwardLeftButton);
+
+  Button forwardRightButton = new Button("forwardRight", x3, y1, eventManager);
+  buttons.add(forwardRightButton);
+  movementButtons.put("forwardRight", forwardRightButton);
+
+  Button downLeftButton = new Button("downLeft", x1, y3, eventManager);
+  buttons.add(downLeftButton);
+  movementButtons.put("downLeft", downLeftButton);
+
+  Button downRightButton = new Button("downRight", x3, y3, eventManager);
+  buttons.add(downRightButton);
+  movementButtons.put("downRight", downRightButton);
   
+  // init control buttons
   buttons.add(new Button("speedLeft-", x4, y1, eventManager));
   buttons.add(new Button("speedLeft+", x5, y1, eventManager));
   buttons.add(new Button("speedRight-", x4, y2, eventManager));
@@ -117,20 +145,28 @@ Boolean isSomeMovementButtonPressed() {
 
 void handleButtonsMovement(EventManager eventManager) {
   if (isForward && isRight) {
+    movementButtons.get("forwardRight").setPressed();
     eventManager.notify("forwardRight");
   } else if (isForward && isLeft) {
+    movementButtons.get("forwardLeft").setPressed();
     eventManager.notify("forwardLeft");
   } else if (isDown && isRight) {
+    movementButtons.get("downRight").setPressed();
     eventManager.notify("downRight");
   } else if (isDown && isLeft) {
+    movementButtons.get("downLeft").setPressed();
     eventManager.notify("downLeft");
   } else if (isForward) {
+    movementButtons.get("forward").setPressed();
     eventManager.notify("forward");
   } else if (isDown) {
+    movementButtons.get("down").setPressed();
     eventManager.notify("down");
   } else if (isLeft) {
+    movementButtons.get("left").setPressed();
     eventManager.notify("left");
   } else if (isRight) {
+    movementButtons.get("right").setPressed();
     eventManager.notify("right");
   }
 }
