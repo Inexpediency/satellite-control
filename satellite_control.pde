@@ -23,7 +23,7 @@ Boolean isLeft = false;
 Boolean isRight = false;
 Boolean isDown = false;
 
-final int maxDrawableDist = 100; 
+final int maxDrawableDist = 150; 
 
 EventManager eventManager;
 List<Button> buttons;
@@ -319,7 +319,7 @@ class Repository {
   int brakeLeft = 50;
   int brakeRight = 50;
   
-  private int frameRate = 10;
+  private int frameRate = 60;
   private int sendRate = 1;
   
   public void setFrameRate(int fr) { 
