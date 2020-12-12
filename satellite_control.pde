@@ -116,10 +116,19 @@ void draw() {
     movementData.updateData();
   }
   
-  updateLightPanels(movementData.lightLeft, movementData.lightForward, movementData.lightRight);
+  updateLightPanels(
+    movementData.getLightLeft(),
+    movementData.getLightForward(),
+    movementData.getLightRight()
+  );
   
-  updateRadar(movementData.distLeft, movementData.distForwardLeft, 
-    movementData.distForward, movementData.distForwardRight, movementData.distRight);
+  updateRadar(
+    movementData.getDistLeft(),
+    movementData.getDistForwardLeft(), 
+    movementData.getDistForward(),
+    movementData.getDistForwardRight(),
+    movementData.getDistRight()
+  );
   
   for (int i = 0; i < buttons.size(); i++) {
     buttons.get(i).print();
@@ -343,13 +352,13 @@ class Repository {
 }
 
 void updateLightPanels(int lightLeft, int lightForward, int lightRight) {
-  fill(lightLeft); 
+  fill(map(lightLeft, 0, 1024, 0, 255));
   rect(0, 0, width/3, height);
 
-  fill(lightForward);   
+  fill(map(lightForward, 0, 1024, 0, 255));   
   rect(width/3, 0, width*2/3, height);
 
-  fill(lightRight);
+  fill(map(lightRight, 0, 1024, 0, 255));
   rect(width*2/3, 0, width, height);
 }
 
@@ -438,19 +447,19 @@ void updateRadar(
 }
 
 class MovementData {
-  Client server;
+  private Client server;
 
-  int lightLeft = 100;
-  int lightForward = 100;
-  int lightRight = 100;
+  private int lightLeft = 100;
+  private int lightForward = 100;
+  private int lightRight = 100;
   
-  int distLeft = 500;
-  int distForwardLeft = 500;
-  int distForward = 500;
-  int distForwardRight = 500;
-  int distRight = 500;
+  private int distLeft = 500;
+  private int distForwardLeft = 500;
+  private int distForward = 500;
+  private int distForwardRight = 500;
+  private int distRight = 500;
 
-  int step = 50;
+  private int step = 50;
 
   MovementData() {}
 
@@ -467,8 +476,8 @@ class MovementData {
       lightLeft = data[0]; 
       lightForward = data[1]; 
       lightRight = data[2]; 
-      distLeft = data[3]; 
 
+      distLeft = data[3]; 
       distForwardLeft = data[4]; 
       distForward = data[5]; 
       distForwardRight = data[6];
@@ -481,57 +490,114 @@ class MovementData {
       distLeft + " " + distForwardLeft + " " + distForward + " " + distForwardRight + " " + distRight + "\n";
   }
 
+  void setLightLeft(int ll) {
+    if (ll > 1024) this.lightLeft = 1024;
+    else if (ll < 0) this.lightLeft = 0;
+    else this.lightLeft = ll;
+  }
+  int getLightLeft() { return this.lightLeft; }
+
+  void setLightForward(int ll) {
+    if (ll > 1024) this.lightForward = 1024;
+    else if (ll < 0) this.lightForward = 0;
+    else this.lightForward = ll;
+  }
+  int getLightForward() { return this.lightForward; }
+
+  void setLightRight(int ll) {
+    if (ll > 1024) this.lightRight = 1024;
+    else if (ll < 0) this.lightRight = 0;
+    else this.lightRight = ll;
+  }
+  int getLightRight() { return this.lightRight; }
+
+
+  void setDistLeft(int dd) {
+    if (dd > 1024) this.distLeft = 1024;
+    else if (dd < 0) this.distLeft = 0;
+    else this.distLeft = dd;
+  }
+  int getDistLeft() { return this.distLeft; }
+
+  void setDistForwardLeft(int dd) {
+    if (dd > 1024) this.distForwardLeft = 1024;
+    else if (dd < 0) this.distForwardLeft = 0;
+    else this.distForwardLeft = dd;
+  }
+  int getDistForwardLeft() { return this.distForwardLeft; }
+
+  void setDistForward(int dd) {
+    if (dd > 1024) this.distForward = 1024;
+    else if (dd < 0) this.distForward = 0;
+    else this.distForward = dd;
+  }
+  int getDistForward() { return this.distForward; }
+
+  void setDistForwardRight(int dd) {
+    if (dd > 1024) this.distForwardRight = 1024;
+    else if (dd < 0) this.distForwardRight = 0;
+    else this.distForwardRight = dd;
+  }
+  int getDistForwardRight() { return this.distForwardRight; }
+
+  void setDistRight(int dd) {
+    if (dd > 1024) this.distRight = 1024;
+    else if (dd < 0) this.distRight = 0;
+    else this.distRight = dd;
+  }
+  int getDistRight() { return this.distRight; }
+
   void updateDataManually() {
     if (!keyPressed) return;
 
     switch (key) {
       case 'r':
-        lightLeft += step / 5;
+        this.setLightLeft(this.lightLeft + step / 5);
         break;
       case 'f':
-        lightLeft -= step / 5;
+        this.setLightLeft(this.lightLeft - step / 5);
         break;
       case 't':
-        lightForward += step / 5;
+        this.setLightForward(this.lightForward + step / 5);
         break;
       case 'g':
-        lightForward -= step / 5;
+        this.setLightForward(this.lightForward - step / 5);
         break;
       case 'y':
-        lightRight += step / 5;
+        this.setLightRight(this.lightRight + step / 5);
         break;
       case 'h':
-        lightRight -= step / 5;
+        this.setLightRight(this.lightRight - step / 5);
         break;
       case 'u':
-        distLeft += step;
+        this.setDistLeft(distLeft + step);
         break;
       case 'j':
-        distLeft -= step;
+        this.setDistLeft(distLeft - step);
         break;
       case 'i':
-        distForwardLeft += step;
+        this.setDistForwardLeft(distForwardLeft + step);
         break;
       case 'k':
-        distForwardLeft -= step;
+        this.setDistForwardLeft(distForwardLeft - step);
         break;
       case 'o':
-        distForward += step;
+        this.setDistForward(distForward + step);
         break;
       case 'l':
-        distForward -= step;
+        this.setDistForward(distForward - step);
         break;
       case 'p':
-        distForwardRight += step;
+        this.setDistForwardRight(distForwardRight + step);
         break;
       case ';':
-        distForwardRight -= step;
+        this.setDistForwardRight(distForwardRight - step);
         break;
       case '[':
-        distRight += step;
+        this.setDistRight(distRight + step);
         break;
       case '\'':
-        distRight -= step;
+        this.setDistRight(distRight - step);
         break;
     }
   }
