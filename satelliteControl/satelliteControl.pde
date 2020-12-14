@@ -2,7 +2,7 @@ import processing.net.*;
 import java.util.List;
 import java.util.HashMap;
 
-final boolean IS_DEV = true; // DEV -> 0; PROD -> 1;
+final boolean IS_DEV = true; // DEVELOPMENT -> TRUE; REAL_TEST -> FALSE;
 
 final float x1 = 100;
 final float x2 = 250;
