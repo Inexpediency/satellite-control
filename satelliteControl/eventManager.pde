@@ -1,8 +1,8 @@
 class EventManager {
-  List<EventListener> listeners = new ArrayList<EventListener>();
-  int sendNumber = 0;
+  private List<EventListener> listeners = new ArrayList<EventListener>();
+  private int sendNumber = 0;
   
-  Repository data;
+  private Repository data;
   
   EventManager(Repository data) {
     this.data = data;
