@@ -1,4 +1,6 @@
 class SensorsVisualization {
+  
+  final int maxDrawableDist = 150; 
 
   public void updateLightPanels(int lightLeft, int lightForward, int lightRight) {
     fill(map(lightLeft, 0, 1024, 0, 255));
