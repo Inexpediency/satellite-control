@@ -1,24 +1,23 @@
 class UserInterfaceUpdater {
+  private EventManager eventManager;
+  private Repository repository;
 
   private HashMap<String, Button> movementButtons = new HashMap<String, Button>();
   private ArrayList<Button> buttons = new ArrayList<Button>();
 
-  private EventManager eventManager;
-  private Repository repository;
+  private final float x1 = 100;
+  private final float x2 = 250;
+  private final float x3 = 400;
+  private final float x4 = 650;
+  private final float x5 = 800;
 
-  final float x1 = 100;
-  final float x2 = 250;
-  final float x3 = 400;
-  final float x4 = 650;
-  final float x5 = 800;
+  private final float y1 = 100;
+  private final float y2 = 200;
+  private final float y3 = 300;
+  private final float y4 = 400;
+  private final float y5 = 500;
 
-  final float y1 = 100;
-  final float y2 = 200;
-  final float y3 = 300;
-  final float y4 = 400;
-  final float y5 = 500;
-
-  final float diameter = 30;
+  private final float diameter = 30;
 
   UserInterfaceUpdater(EventManager eventManager, Repository repository  ) {
     this.eventManager = eventManager;
