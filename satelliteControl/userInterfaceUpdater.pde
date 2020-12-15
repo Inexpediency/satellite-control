@@ -19,7 +19,9 @@ class UserInterfaceUpdater {
 
   private final float diameter = 30;
 
-  UserInterfaceUpdater(EventManager eventManager, Repository repository  ) {
+  private final int widthForData = 200;
+
+  UserInterfaceUpdater(EventManager eventManager, Repository repository) {
     this.eventManager = eventManager;
     this.repository = repository;
 

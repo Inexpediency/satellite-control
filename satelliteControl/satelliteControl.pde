@@ -10,6 +10,7 @@ MovementData movementData;
 
 SensorsVisualization sensorsVisualization;
 UserInterfaceUpdater userInterfaceUpdater;
+DataPrinterOnScreen dataPrinterOnScreen;
 
 Boolean isForward = false;
 Boolean isLeft = false;
@@ -17,7 +18,7 @@ Boolean isRight = false;
 Boolean isDown = false;
 
 void setup() {
-  size(1000, 600);
+  size(1200, 600);
   background(150);
   stroke(0);
   
@@ -37,6 +38,7 @@ void setup() {
   }
   eventManager.subscribe(new Printer());
   
+  dataPrinterOnScreen = new DataPrinterOnScreen(movementData, repository);
   userInterfaceUpdater = new UserInterfaceUpdater(eventManager, repository);
   sensorsVisualization = new SensorsVisualization();
 }
@@ -67,6 +69,7 @@ void draw() {
   );
 
   userInterfaceUpdater.update();
+  dataPrinterOnScreen.print();
 }
 
 void keyPressed() {

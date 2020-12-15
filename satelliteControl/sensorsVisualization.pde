@@ -1,22 +1,25 @@
 class SensorsVisualization {
-  
+  final int width = 1000;
+  final int height = 600;
   final int maxDrawableDist = 150; 
 
   public void updateLightPanels(int lightLeft, int lightForward, int lightRight) {
+    stroke(0);
+    
     fill(map(lightLeft, 0, 1024, 0, 255));
-    rect(0, 0, width/3, height);
+    rect(0, 0, this.width/3, this.height);
 
     fill(map(lightForward, 0, 1024, 0, 255));   
-    rect(width/3, 0, width*2/3, height);
+    rect(this.width/3, 0, this.width*2/3, this.height);
 
     fill(map(lightRight, 0, 1024, 0, 255));
-    rect(width*2/3, 0, width, height);
+    rect(this.width*2/3, 0, this.width, this.height);
   }
 
   public void updateRadar(
     int distLeft, int distForwardLeft, int distForward, int distForwardRight, int distRight
   ) {
-    translate(width/2, height - 70);
+    translate(this.width/2, this.height - 70);
     
     int x = 0;
     int y = 0;
@@ -64,7 +67,7 @@ class SensorsVisualization {
     );
     
     rotate(radians(-90));
-    translate(-width / 2, -height + 70);
+    translate(-this.width / 2, -this.height + 70);
   }
 
   private void setupGradient(
