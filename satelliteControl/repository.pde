@@ -1,5 +1,5 @@
 class Repository {
-  private int speedDelta = 7;
+  private int speedDelta = 2;
   
   int direction = 0;
   int speedLeft = 150;
@@ -7,32 +7,64 @@ class Repository {
   int brakeLeft = 50;
   int brakeRight = 50;
   
-  private int frameRate = 60;
-  private int sendRate = 1;
+  private float frameRate = 60;
+  private float sendRate = 1;
   
-  public void setFrameRate(int fr) { 
+  public void setFrameRate(float fr) { 
     if (fr < 1) fr = 1; 
-    if (fr > 60) fr = 60;
-    this.frameRate = fr;
+    else if (fr > 60) fr = 60;
+    else this.frameRate = fr;
   };
-  public int getFrameRate() { return this.frameRate; }
+  public float getFrameRate() { return this.frameRate; }
   
-  public void setSendRate(int sr) { 
+  public void setSendRate(float sr) { 
     if (sr < 1) sr = 1;
-    if (sr > 20) sr = 20;
-    this.sendRate = sr; 
+    else if (sr > 20) sr = 20;
+    else this.sendRate = sr; 
   };
-  public int getSendRate() { return this.sendRate; }
+  public float getSendRate() { return this.sendRate; }
   
-  void incSpeedLeft() { this.speedLeft += speedDelta; }
-  void incSpeedRight() { this.speedRight += speedDelta; }
-  void incBrakeLeft() { this.brakeLeft += speedDelta; }
-  void incBrakeRight() { this.brakeRight += speedDelta; }
-  
-  void decSpeedLeft() { this.speedLeft -= speedDelta; }
-  void decSpeedRight() { this.speedRight -= speedDelta; }
-  void decBrakeLeft() { this.brakeLeft -= speedDelta; }
-  void decBrakeRight() { this.brakeRight -= speedDelta; }
+  void incSpeedLeft() {
+    if (this.speedLeft < 1024) {
+      this.speedLeft += speedDelta;
+    }
+  }
+  void incSpeedRight() { 
+    if (this.speedLeft < 1024) {
+      this.speedRight += speedDelta;
+    }
+  }
+  void incBrakeLeft() { 
+    if (this.speedLeft < 1024) {
+      this.brakeLeft += speedDelta;
+    }
+  }
+  void incBrakeRight() {
+    if (this.speedLeft < 1024) {
+      this.brakeRight += speedDelta;
+    }
+  }
+
+  void decSpeedLeft() { 
+    if (this.speedLeft > 0) {
+      this.speedLeft -= speedDelta;
+    }
+  }
+  void decSpeedRight() { 
+    if (this.speedRight > 0) {
+      this.speedRight -= speedDelta; 
+    }
+  }
+  void decBrakeLeft() { 
+    if (this.brakeLeft > 0) {
+      this.brakeLeft -= speedDelta; 
+    }
+  }
+  void decBrakeRight() { 
+    if (this.brakeRight > 0) {
+      this.brakeRight -= speedDelta; 
+    }
+  }
   
   String toString() {
     return direction + " " + speedLeft + " " + speedRight + " " + brakeLeft + " " + brakeRight + " " + frameRate + "\n";

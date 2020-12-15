@@ -45,7 +45,7 @@ void setup() {
 
 void draw() {
   background(150);
-  frameRate(repository.getFrameRate());
+  frameRate((int)repository.getFrameRate());
 
   if (IS_DEV) {
     movementData.updateDataManually();

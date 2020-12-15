@@ -1,11 +1,11 @@
 class Button extends Publisher {
-  String label;
-  float x, y;
+  private String label;
+  private float x, y;
   
-  float w = 100;
-  float h = 50;
+  private final float w = 97;
+  private final float h = 55;
   
-  EventManager events;
+  private EventManager events;
   
   Button(String label, float x, float y, EventManager events) {
     this.events = events;
@@ -13,7 +13,7 @@ class Button extends Publisher {
     this.x = x;
     this.y = y;
   }
-    
+
   void setPressed() {
     fill(0, 50, 255);
     rect(x, y, w, h, 10);
@@ -24,7 +24,7 @@ class Button extends Publisher {
   
   void print() {
       fill(0, 0, 200);
-      rect(x, y, w, h, 10);
+      rect(x, y, w, h, 11);
       textAlign(CENTER, CENTER);
       textSize (14);
       fill(255);

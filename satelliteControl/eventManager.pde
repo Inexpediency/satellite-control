@@ -33,13 +33,13 @@ class EventManager {
     } else if (eventType == "downRight") {
       this.data.direction = 8;
     } else if (eventType == "frameRate+") {
-      this.data.setFrameRate(this.data.getFrameRate() + 1);
+      this.data.setFrameRate(this.data.getFrameRate() + 0.25);
     } else if (eventType == "frameRate-") {
-      this.data.setFrameRate(this.data.getFrameRate() - 1);
+      this.data.setFrameRate(this.data.getFrameRate() - 0.25);
     } else if (eventType == "sendRate+") {
-      this.data.setSendRate(this.data.getSendRate() + 1);
+      this.data.setSendRate(this.data.getSendRate() + 0.25);
     } else if (eventType == "sendRate-") {
-      this.data.setSendRate(this.data.getSendRate() - 1);
+      this.data.setSendRate(this.data.getSendRate() - 0.25);
     } else if (eventType == "speedLeft+") {
       this.data.incSpeedLeft();
     } else if (eventType == "speedLeft-") {
