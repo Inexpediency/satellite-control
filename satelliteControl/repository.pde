@@ -1,11 +1,11 @@
 class Repository {
   private int speedDelta = 2;
   
-  int direction = 0;
-  int speedLeft = 150;
-  int speedRight = 150;
-  int brakeLeft = 50;
-  int brakeRight = 50;
+  private int direction = 0;
+  private int speedLeft = 150;
+  private int speedRight = 150;
+  private int brakeLeft = 50;
+  private int brakeRight = 50;
   
   private float frameRate = 60;
   private float sendRate = 1;
