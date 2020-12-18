@@ -1,4 +1,5 @@
 class ServerListener extends EventListener {
+  
   private Client server;
   
   ServerListener(Client server) {

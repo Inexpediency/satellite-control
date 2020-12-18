@@ -1,4 +1,5 @@
 class MovementData {
+  
   private Client server;
 
   private int lightLeft = 100;

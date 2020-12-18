@@ -1,4 +1,5 @@
 class Notifier extends EventListener {
+  
   Client client;
   
   Notifier(Client client) {

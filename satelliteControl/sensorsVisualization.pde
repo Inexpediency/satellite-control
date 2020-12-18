@@ -1,7 +1,8 @@
 class SensorsVisualization {
-  final int width = 1000;
-  final int height = 600;
-  final int maxDrawableDist = 150; 
+
+  private final int width = 1000;
+  private final int height = 600;
+  private final int maxDrawableDist = 150; 
 
   public void updateLightPanels(int lightLeft, int lightForward, int lightRight) {
     stroke(0);

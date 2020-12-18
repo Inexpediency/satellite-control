@@ -1,28 +1,42 @@
 class Repository {
-  private int speedDelta = 2;
+  
+  private float speedDelta = 0.25;
   
   private int direction = 0;
-  private int speedLeft = 150;
-  private int speedRight = 150;
-  private int brakeLeft = 50;
-  private int brakeRight = 50;
+  private float speedLeft = 150;
+  private float speedRight = 150;
+  private float brakeLeft = 50;
+  private float brakeRight = 50;
   
-  private float frameRate = 60;
+  private float frameRate = 50;
   private float sendRate = 1;
+
+  void setDirection(int dir) {
+    this.direction = dir;
+  }
+  int getDirection() {
+    return this.direction;
+  }
   
-  public void setFrameRate(float fr) { 
-    if (fr < 1) fr = 1; 
-    else if (fr > 60) fr = 60;
-    else this.frameRate = fr;
-  };
-  public float getFrameRate() { return this.frameRate; }
-  
-  public void setSendRate(float sr) { 
-    if (sr < 1) sr = 1;
-    else if (sr > 20) sr = 20;
-    else this.sendRate = sr; 
-  };
-  public float getSendRate() { return this.sendRate; }
+  void incFrameRate() {
+  if (this.frameRate < 60) this.frameRate += this.speedDelta / 2; 
+  }
+  void decFrameRate() {
+    if (this.frameRate > 10) this.frameRate -= this.speedDelta / 2;
+  }
+  int getFrameRate() {
+    return (int)this.frameRate;
+  }
+
+  void incSendRate() {
+  if (this.sendRate < 20) this.sendRate += this.speedDelta / 2; 
+  }
+  void decSendRate() {
+    if (this.sendRate > 1) this.sendRate -= this.speedDelta / 2;
+  }
+  int getSendRate() {
+    return (int)this.sendRate;
+  }
   
   void incSpeedLeft() {
     if (this.speedLeft < 1024) {
@@ -65,7 +79,20 @@ class Repository {
       this.brakeRight -= speedDelta; 
     }
   }
-  
+
+  int getSpeedLeft() {
+    return (int)this.speedLeft;
+  }
+  int getSpeedRight() {
+    return (int)this.speedRight;
+  }
+  int getBrakeLeft() {
+    return (int)this.brakeLeft;
+  }
+  int getBrakeRight() {
+    return (int)this.brakeRight;
+  }
+
   String toString() {
     return direction + " " + speedLeft + " " + speedRight + " " + brakeLeft + " " + brakeRight + " " + frameRate + "\n";
   }

@@ -1,4 +1,5 @@
 class UserInterfaceUpdater {
+  
   private EventManager eventManager;
   private Repository repository;
 

@@ -1,4 +1,5 @@
 class DataPrinterOnScreen {
+  
   MovementData movementData;
   Repository repository;
 
@@ -60,13 +61,13 @@ class DataPrinterOnScreen {
       "Brake right: %d\n" +
       "Frame rate: %d\n" +
       "Send rate: %d\n",
-      this.repository.direction,
-      this.repository.speedLeft,
-      this.repository.speedRight,
-      this.repository.brakeLeft,
-      this.repository.brakeRight,
-      (int)this.repository.frameRate,
-      (int)this.repository.sendRate
+      this.repository.getDirection(),
+      this.repository.getSpeedLeft(),
+      this.repository.getSpeedRight(),
+      this.repository.getBrakeLeft(),
+      this.repository.getBrakeRight(),
+      this.repository.getFrameRate(),
+      this.repository.getSendRate()
     );
   }
 }

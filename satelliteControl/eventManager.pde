@@ -15,31 +15,31 @@ class EventManager {
   
   void notify(String eventType) {
     if (eventType == "chill") {
-      this.data.direction = 0;
+      this.data.setDirection(0);
     } else if (eventType == "forward") {
-      this.data.direction = 1;
+      this.data.setDirection(1);
     } else if (eventType == "down") {
-      this.data.direction = 2;
+      this.data.setDirection(2);
     } else if (eventType == "left") {
-      this.data.direction = 3;
+      this.data.setDirection(3);
     } else if (eventType == "right") {
-      this.data.direction = 4;
+      this.data.setDirection(4);
     } else if (eventType == "forwardLeft") {
-      this.data.direction = 5;
+      this.data.setDirection(5);
     } else if (eventType == "forwardRight") {
-      this.data.direction = 6;
+      this.data.setDirection(6);
     } else if (eventType == "downLeft") {
-      this.data.direction = 7;
+      this.data.setDirection(7);
     } else if (eventType == "downRight") {
-      this.data.direction = 8;
+      this.data.setDirection(8);
     } else if (eventType == "frameRate+") {
-      this.data.setFrameRate(this.data.getFrameRate() + 0.25);
+      this.data.incFrameRate();
     } else if (eventType == "frameRate-") {
-      this.data.setFrameRate(this.data.getFrameRate() - 0.25);
+      this.data.decFrameRate();
     } else if (eventType == "sendRate+") {
-      this.data.setSendRate(this.data.getSendRate() + 0.25);
+      this.data.incSendRate();
     } else if (eventType == "sendRate-") {
-      this.data.setSendRate(this.data.getSendRate() - 0.25);
+      this.data.decSendRate();
     } else if (eventType == "speedLeft+") {
       this.data.incSpeedLeft();
     } else if (eventType == "speedLeft-") {
@@ -58,12 +58,12 @@ class EventManager {
       this.data.decBrakeRight();
     }
     
-   if (this.sendNumber >= this.data.getSendRate()) {
-     for (int i = 0; i < listeners.size(); i++) {
+    if (this.sendNumber >= this.data.getSendRate()) {
+      for (int i = 0; i < listeners.size(); i++) {
         listeners.get(i).sendUpdate(this.data.toString());
-     }
-     this.sendNumber = 1;
-   } 
-   this.sendNumber++;
+      }
+      this.sendNumber = 1;
+    } 
+    this.sendNumber++;
   }
 }
