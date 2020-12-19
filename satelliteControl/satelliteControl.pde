@@ -12,17 +12,17 @@ SensorsVisualization sensorsVisualization;
 UserInterfaceUpdater userInterfaceUpdater;
 DataPrinterOnScreen dataPrinterOnScreen;
 
-Boolean isForward = false;
-Boolean isLeft = false;
-Boolean isRight = false;
-Boolean isDown = false;
+boolean isForward = false;
+boolean isLeft = false;
+boolean isRight = false;
+boolean isDown = false;
 
 void setup() {
   size(1200, 600);
   background(150);
   stroke(0);
   
-  Client server = new Client(this, "someport", 1234);
+  Client server = new Client(this, "ip", 12345);
 
   if (IS_DEV) {
     movementData = new MovementData();
@@ -45,11 +45,10 @@ void setup() {
 
 void draw() {
   background(150);
-  frameRate((int)repository.getFrameRate());
+  frameRate(repository.getFrameRate());
 
   if (IS_DEV) {
     movementData.updateDataManually();
-    print(movementData.serialize());
   } else {
     movementData.updateData();
   }

@@ -63,7 +63,7 @@ class EventManager {
         listeners.get(i).sendUpdate(this.data.toString());
       }
       this.sendNumber = 1;
-    } 
+    }
     this.sendNumber++;
   }
 }

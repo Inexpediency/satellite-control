@@ -4,16 +4,18 @@ class SensorsVisualization {
   private final int height = 600;
   private final int maxDrawableDist = 150; 
 
+  private final int maxAnalogReadValue = 255;
+
   public void updateLightPanels(int lightLeft, int lightForward, int lightRight) {
     stroke(0);
     
-    fill(map(lightLeft, 0, 1024, 0, 255));
+    fill(lightLeft);
     rect(0, 0, this.width/3, this.height);
 
-    fill(map(lightForward, 0, 1024, 0, 255));   
+    fill(lightForward);   
     rect(this.width/3, 0, this.width*2/3, this.height);
 
-    fill(map(lightRight, 0, 1024, 0, 255));
+    fill(lightRight);
     rect(this.width*2/3, 0, this.width, this.height);
   }
 
@@ -21,18 +23,18 @@ class SensorsVisualization {
     int distLeft, int distForwardLeft, int distForward, int distForwardRight, int distRight
   ) {
     translate(this.width/2, this.height - 70);
-    
+
     int x = 0;
     int y = 0;
 
-    float alpha = 22.5;
+    final float alpha = 22.5;
 
-    float dl = map(distLeft, 0, 1024, 0, maxDrawableDist);
-    float dfl = map(distForwardLeft, 0, 1024, 0, maxDrawableDist);
-    float df = map(distForward, 0, 1024, 0, maxDrawableDist);
-    float dfr = map(distForwardRight, 0, 1024, 0, maxDrawableDist);
-    float dr = map(distRight, 0, 1024, 0, maxDrawableDist);
-    
+    float dl = mapDistToDrawable(distLeft);
+    float dfl = mapDistToDrawable(distForwardLeft);
+    float df = mapDistToDrawable(distForward);
+    float dfr = mapDistToDrawable(distForwardRight);
+    float dr = mapDistToDrawable(distRight);
+
     // forward
     setupGradient(df, x, y,
       x - df * tan(radians(alpha)), y - df, 
@@ -69,6 +71,10 @@ class SensorsVisualization {
     
     rotate(radians(-90));
     translate(-this.width / 2, -this.height + 70);
+  }
+
+  private int mapDistToDrawable(int value) {
+    return (int)map(value, 0, maxAnalogReadValue, 0, maxDrawableDist);
   }
 
   private void setupGradient(

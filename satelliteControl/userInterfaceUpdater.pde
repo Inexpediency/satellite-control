@@ -12,11 +12,11 @@ class UserInterfaceUpdater {
   private final float x4 = 650;
   private final float x5 = 800;
 
-  private final float y1 = 100;
-  private final float y2 = 200;
-  private final float y3 = 300;
-  private final float y4 = 400;
-  private final float y5 = 500;
+  private final float y1 = 70;
+  private final float y2 = 170;
+  private final float y3 = 270;
+  private final float y4 = 370;
+  private final float y5 = 470;
 
   private final float diameter = 30;
 
