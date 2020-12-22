@@ -8,8 +8,8 @@ class Repository {
   private float brakeLeft = 40;
   private float brakeRight = 40;
   
-  private float frameRate = 40;
-  private float sendRate = 20;
+  private float frameRate = 60;
+  private float sendRate = 40;
 
   void setDirection(int dir) {
     this.direction = dir;
@@ -29,10 +29,10 @@ class Repository {
   }
 
   void incSendRate() {
-    if (this.sendRate < 30) this.sendRate += this.tickDelta; 
+    if (this.sendRate < 60) this.sendRate += this.tickDelta; 
   }
   void decSendRate() {
-    if (this.sendRate > 1) this.sendRate -= this.tickDelta;
+    if (this.sendRate > 10) this.sendRate -= this.tickDelta;
   }
   int getSendRate() {
     return (int)this.sendRate;
