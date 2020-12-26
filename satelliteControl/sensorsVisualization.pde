@@ -4,7 +4,7 @@ class SensorsVisualization {
   private final int height = 600;
   private final int maxDrawableDist = 150; 
 
-  private final int maxAnalogReadValue = 255;
+  private final int maxAnalogReadValue = 1000;
 
   public void updateLightPanels(int lightLeft, int lightForward, int lightRight) {
     stroke(0);

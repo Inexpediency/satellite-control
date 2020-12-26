@@ -3,10 +3,10 @@ class Repository {
   private float tickDelta = 0.25;
   
   private int direction = 0;
-  private float speedLeft = 130;
-  private float speedRight = 130;
-  private float brakeLeft = 40;
-  private float brakeRight = 40;
+  private float speedLeft = 135;
+  private float speedRight = 135;
+  private float brakeLeft = 45;
+  private float brakeRight = 45;
   
   private float frameRate = 60;
   private float sendRate = 40;
