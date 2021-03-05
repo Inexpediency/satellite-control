@@ -6,11 +6,11 @@ class UserInterfaceUpdater {
   private HashMap<String, Button> movementButtons = new HashMap<String, Button>();
   private ArrayList<Button> buttons = new ArrayList<Button>();
 
-  private final float x1 = 100;
-  private final float x2 = 250;
-  private final float x3 = 400;
-  private final float x4 = 650;
-  private final float x5 = 800;
+  private final float x1 = 60;
+  private final float x2 = 210;
+  private final float x3 = 360;
+  private final float x4 = 670;
+  private final float x5 = 840;
 
   private final float y1 = 70;
   private final float y2 = 170;
@@ -18,7 +18,7 @@ class UserInterfaceUpdater {
   private final float y4 = 370;
   private final float y5 = 470;
 
-  private final float diameter = 30;
+  private final float diameter = 35;
 
   private final int widthForData = 200;
 
@@ -188,7 +188,5 @@ class UserInterfaceUpdater {
     
     buttons.add(new Button("frameRate-", x1, y4, eventManager)); 
     buttons.add(new Button("frameRate+", x2, y4, eventManager));
-    buttons.add(new Button("sendRate-", x1, y5, eventManager)); 
-    buttons.add(new Button("sendRate+", x2, y5, eventManager));
   }
 }

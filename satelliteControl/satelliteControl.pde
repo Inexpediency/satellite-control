@@ -2,7 +2,7 @@ import processing.net.*;
 import java.util.List;
 import java.util.HashMap;
 
-final boolean IS_DEV = false; // DEVELOPMENT -> TRUE; REAL_TEST -> FALSE;
+final boolean IS_DEV = true; // DEVELOPMENT -> TRUE; REAL_TEST -> FALSE;
 
 EventManager eventManager;
 Repository repository;
@@ -22,7 +22,7 @@ void setup() {
   background(150);
   stroke(0);
   
-  Client server = new Client(this, "26.225.147.238", 12345);
+  Client server;
 
   if (IS_DEV) {
     movementData = new MovementData();

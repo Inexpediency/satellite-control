@@ -1,12 +1,14 @@
 class EventManager {
   
   private List<EventListener> listeners = new ArrayList<EventListener>();
-  private int sendNumber = 0;
   
   private Repository data;
+  private Repository previousData;
   
   EventManager(Repository data) {
     this.data = data;
+
+    this.previousData = new Repository();
   }
   
   void subscribe(EventListener listener) {
@@ -36,10 +38,6 @@ class EventManager {
       this.data.incFrameRate();
     } else if (eventType == "frameRate-") {
       this.data.decFrameRate();
-    } else if (eventType == "sendRate+") {
-      this.data.incSendRate();
-    } else if (eventType == "sendRate-") {
-      this.data.decSendRate();
     } else if (eventType == "speedLeft+") {
       this.data.incSpeedLeft();
     } else if (eventType == "speedLeft-") {
@@ -58,12 +56,12 @@ class EventManager {
       this.data.decBrakeRight();
     }
     
-    if (this.sendNumber >= this.data.getSendRate()) {
+    if (this.data.differenceBetweenSendableData(this.previousData)) {
       for (int i = 0; i < listeners.size(); i++) {
         listeners.get(i).sendUpdate(this.data.toString());
       }
-      this.sendNumber = 1;
     }
-    this.sendNumber++;
+
+    this.previousData = this.data.copy();
   }
 }

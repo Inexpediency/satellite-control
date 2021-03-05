@@ -9,7 +9,40 @@ class Repository {
   private float brakeRight = 45;
   
   private float frameRate = 60;
-  private float sendRate = 40;
+
+  Repository copy() {
+    Repository r = new Repository();
+
+    r.tickDelta = this.tickDelta;
+
+    r.direction = this.direction;
+    r.speedLeft = this.speedLeft;
+    r.speedRight = this.speedRight;
+    r.brakeLeft = this.brakeLeft;
+    r.brakeRight = this.brakeRight;
+
+    r.frameRate = this.frameRate;
+
+    return r;
+  }
+
+  Boolean differenceBetweenSendableData(Repository last) {
+    if (
+      this.getDirection() != last.getDirection() ||
+      this.getSpeedLeft() != last.getSpeedLeft() ||
+      this.getSpeedRight() != last.getSpeedRight() ||
+      this.getBrakeLeft() != last.getBrakeLeft() ||
+      this.getBrakeRight() != last.getBrakeRight() ||
+      this.getFrameRate() != last.getFrameRate()
+    ) return true;
+
+    return false;
+  }
+
+  String toString() {
+    return this.getDirection() + " " + this.getSpeedLeft() + " " + this.getSpeedRight() + " "
+      + this.getBrakeLeft() + " " + this.getBrakeRight() + " " + this.getFrameRate() + "\n";
+  }
 
   void setDirection(int dir) {
     this.direction = dir;
@@ -26,16 +59,6 @@ class Repository {
   }
   int getFrameRate() {
     return (int)this.frameRate;
-  }
-
-  void incSendRate() {
-    if (this.sendRate < 60) this.sendRate += this.tickDelta; 
-  }
-  void decSendRate() {
-    if (this.sendRate > 10) this.sendRate -= this.tickDelta;
-  }
-  int getSendRate() {
-    return (int)this.sendRate;
   }
   
   void incSpeedLeft() {
@@ -91,10 +114,5 @@ class Repository {
   }
   int getBrakeRight() {
     return (int)this.brakeRight;
-  }
-
-  String toString() {
-    return this.getDirection() + " " + this.getSpeedLeft() + " " + this.getSpeedRight() + " "
-      + this.getBrakeLeft() + " " + this.getBrakeRight() + " " + this.getFrameRate() + "\n";
   }
 }

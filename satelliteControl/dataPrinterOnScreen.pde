@@ -59,17 +59,13 @@ class DataPrinterOnScreen {
       "Speed right: %d\n" +
       "Brake left: %d\n" +
       "Brake right: %d\n" +
-      "Frame rate: %d\n" +
-      "Send rate: %d\n" +
-      "Sending/second: %.2f",
+      "Frame rate: %d\n",
       this.repository.getDirection(),
       this.repository.getSpeedLeft(),
       this.repository.getSpeedRight(),
       this.repository.getBrakeLeft(),
       this.repository.getBrakeRight(),
-      this.repository.getFrameRate(),
-      this.repository.getSendRate(),
-      (float)this.repository.getFrameRate() / (float)this.repository.getSendRate()
+      this.repository.getFrameRate()
     );
   }
 }
